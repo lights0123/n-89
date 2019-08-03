@@ -136,11 +136,6 @@ uint16_t heap_size(int handle) {
 
 	return size;
 }
-
-void heap_get_block_size(int handle, uint16_t *size) {
-	*size = heap_size(handle);
-}
-
 /*
     Given an handle, retrieve block size and block address
 */

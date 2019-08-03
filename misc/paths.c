@@ -158,12 +158,3 @@ static void init_win32_paths(void) {
 int initialize_paths(void) {
 	return 0;
 }
-
-const char *tilp_paths_build_glade(const char *name) {
-	static char *path = NULL;
-
-	free(path);
-	path = g_strconcat(inst_paths.glade_dir, name, NULL);
-
-	return path;
-}

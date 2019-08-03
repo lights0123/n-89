@@ -32,6 +32,7 @@
 
 #include "../../src/logging.h"
 #include "../ti68k_int.h"
+#include "../ti68k_def.h"
 #include "../uae/sysdeps.h";
 #include "mem_map.h"
 
@@ -73,82 +74,6 @@ int memmap_unload(void) {
 		array = NULL;
 	}
 
-	return 0;
-}
-
-/*
-    Load information on I/O ports.
-    Return value:
-     0 if successful
-    -1 if error
-    -2 if no image
-    -4 if already loaded
-
-    File naming scheme : "memmap_model.txt" => memmap_89.txt
-*/
-int memmap_load(const char *path) {
-	FILE *f;
-	char *filename;
-	char line[1024];
-	int n;
-
-	static int calc_type = 0;
-	static int hw_type = 0;
-
-	if(!img_loaded) return -2;
-	if(calc_type != tihw.calc_type || hw_type != tihw.hw_type) {
-		calc_type = tihw.calc_type;
-		hw_type = tihw.hw_type;
-	} else
-		return -4;
-
-	if(array) memmap_unload();
-
-	filename = g_strconcat(path, memmap_get_filename(), NULL);
-	f = fopen(filename, "rb");
-	if(f == NULL) {
-		free(filename);
-		return -1;
-	}
-
-	for(n = 0; !feof(f);) {
-		char **split;
-		MEM_MAP *s;
-		uint32_t tmp;
-
-		if(!fgets(line, sizeof(line), f)) break;
-		if(!*line) break;
-		line[strlen(line) - 2] = '\0';
-
-		if(line[0] == ';') continue;
-
-		if(strlen(line) < 2) continue;
-
-		if(feof(f)) break;
-
-		split = g_strsplit_set(line, "-:", 3);
-		if(!split[0] || !split[1] || !split[2]) {
-			fprintf(stderr, "Error at line %i: malformed line !\n", n);
-			return -1;
-		}
-
-		array = g_realloc(array, (n + 2) * sizeof(MEM_MAP *));
-		s = malloc(sizeof(MEM_MAP));
-
-		sscanf(split[0], "%06x", &s->addr);
-		sscanf(split[1], "%06x", &tmp);
-		s->size = tmp - s->addr + 1;
-		s->name = strdup(split[2]);
-
-		g_strfreev(split);
-		array[n++] = s;
-		array[n] = NULL;
-	}
-
-	free(filename);
-	fclose(f);
-
-	tiemu_info(_("loading memory map: %s"), memmap_get_filename());
 	return 0;
 }
 

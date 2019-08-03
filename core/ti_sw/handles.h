@@ -6,8 +6,8 @@
  *  Copyright (c) 2000-2001, Thomas Corvazier, Romain Lievin
  *  Copyright (c) 2001-2003, Romain Lievin
  *  Copyright (c) 2003, Julien Blache
- *  Copyright (c) 2004, Romain Liévin
- *  Copyright (c) 2005, Romain Liévin
+ *  Copyright (c) 2004, Romain Liï¿½vin
+ *  Copyright (c) 2005, Romain Liï¿½vin
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -32,7 +32,6 @@
 void heap_get_addr(uint32_t *base);
 
 void heap_get_block_addr(int handle, uint32_t *addr);
-void heap_get_block_size(int handle, uint16_t *size);
 void heap_get_block_addr_and_size(int handle, uint32_t *addr, uint16_t *size);
 
 void heap_search_for_address(uint32_t address, int *handle);

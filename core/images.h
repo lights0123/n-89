@@ -28,7 +28,7 @@
 #define __TI68K_IMAGES__
 
 #include <stdint.h>
-
+#include "ti68k_def.h"
 /*
   Definitions
 */
@@ -41,7 +41,7 @@
 
 // If this structure is modified, the SAV_REVISION number (state.c)
 // has to be incremented.
-
+G_BEGIN_DECLS
 typedef struct {
 	char signature[16];  // "TiEmu img v2.00" (dc)
 	int32_t revision;    // structure revision (compatibility)
@@ -212,7 +212,6 @@ int ti68k_convert_tib_to_image(const char *src, const char *dirname, char **dst,
 int ti68k_merge_rom_and_tib_to_image(const char *srcname1, const char *srcname2, const char *dirname, char **dstname);
 
 int ti68k_load_image(const char *filename);
-int ti68k_load_upgrade(const char *filename);
 int ti68k_unload_image_or_upgrade(void);
-
+G_END_DECLS
 #endif

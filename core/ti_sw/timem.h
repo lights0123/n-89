@@ -28,11 +28,12 @@
 #define __TIMEM__
 
 #include "../ti_hw/mem.h"
+#include "../ti68k_def.h"
 
 /*
     Functions
 */
-
+G_BEGIN_DECLS
 uint16_t rd_word(uint8_t *p);
 uint32_t rd_long(uint8_t *p);
 
@@ -49,5 +50,5 @@ void wr_long(uint8_t *p, uint32_t d);
 
 void mem_rd_block(uint32_t a, uint8_t *d, uint16_t len);
 void mem_wr_block(uint32_t a, uint8_t *d, uint16_t len);
-
+G_END_DECLS
 #endif

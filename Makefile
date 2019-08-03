@@ -3,28 +3,29 @@ DEBUG = FALSE
 GCC = nspire-gcc
 AS  = nspire-as
 GXX = nspire-g++
-LD  = nspire-ld
-GENZEHN = genzehn
 
 GCCFLAGS = -Wall -W -marm
-LDFLAGS =
-ZEHNFLAGS = --name "n-89"
 
 ifeq ($(DEBUG),FALSE)
-	GCCFLAGS += -Os
+	GCCFLAGS += -O3
 else
 	GCCFLAGS += -O0 -g
 endif
 
-OBJS = $(patsubst %.c, %.o, $(shell find . -name \*.c))
+EXCLUDE = ./core/uae/build68k.c ./core/uae/cpustbl.c ./core/uae/fpp.c ./core/uae/gencpu.c ./core/uae/readcpu.c ./core/uae/cpudefs.c ./core/uae/missing.c ./core/uae/cpuemu.c
+OBJS = $(patsubst %.c, %.o, $(filter-out $(EXCLUDE), $(shell find . -name \*.c)))
 OBJS += $(patsubst %.cpp, %.o, $(shell find . -name \*.cpp))
 OBJS += $(patsubst %.S, %.o, $(shell find . -name \*.S))
-EXE = n-89
-DISTDIR = .
+OBJS += ./core/uae/cpudefs.o ./core/uae/cpustbl.o ./core/uae/readcpu.o ./core/uae/fpp.o ./core/uae/missing.o ./core/uae/cpuemu1.o ./core/uae/cpuemu2.o ./core/uae/cpuemu3.o ./core/uae/cpuemu4.o ./core/uae/cpuemu5.o ./core/uae/cpuemu6.o ./core/uae/cpuemu7.o ./core/uae/cpuemu8.o
+LIB = n-89
 vpath %.tns $(DISTDIR)
 vpath %.elf $(DISTDIR)
 
-all: $(EXE).tns
+all: lib$(LIB).a
+
+uae:
+	cd core/uae && $(MAKE) CC="$(GCC)" CFLAGS="$(GCCFLAGS)" gen
+	cd core/uae && $(MAKE) CC="$(GCC)" CFLAGS="$(GCCFLAGS)" all
 
 %.o: %.c
 	$(GCC) $(GCCFLAGS) -c $< -o $@
@@ -35,14 +36,9 @@ all: $(EXE).tns
 %.o: %.S
 	$(AS) -c $< -o $@
 
-$(EXE).elf: $(OBJS)
-	mkdir -p $(DISTDIR)
-	$(LD) $^ -o $@ $(LDFLAGS)
-
-$(EXE).tns: $(EXE).elf
-	$(GENZEHN) --input $^ --output $@.zehn $(ZEHNFLAGS)
-	make-prg $@.zehn $@
-	rm $@.zehn
+lib$(LIB).a: uae $(OBJS)
+	ar rcs lib$(LIB).a $(OBJS)
 
 clean:
-	rm -f $(OBJS) $(DISTDIR)/$(EXE).tns $(DISTDIR)/$(EXE).elf $(DISTDIR)/$(EXE).zehn
+	rm -f $(OBJS)
+	cd core/uae && $(MAKE) clean

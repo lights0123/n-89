@@ -37,11 +37,21 @@ extern "C" {
 #endif
 
 #include <stdint.h>
-
+#include <stdint.h>
 #include "mem_size.h"
 #include "ti_hw/macros.h"
 #include "ti_hw/rtc_hw3.h"
 
+uint16_t GUINT16_FROM_BE(uint16_t num);
+#define GUINT16_TO_BE GUINT16_FROM_BE
+
+uint32_t GUINT32_FROM_BE(uint32_t num);
+#define GUINT32_TO_BE GUINT32_FROM_BE
+
+char *g_strconcat(const char *string1, ...);
+char *g_strdup_printf(const char *format, ...);
+char *g_strdup(const char *str);
+const char *g_basename(const char *file_name);
 /* Equivalences */
 
 #ifdef __WIN32__

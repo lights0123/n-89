@@ -45,7 +45,6 @@ typedef struct {
 
 /* Functions */
 
-int memmap_load(const char *path);
 int memmap_unload(void);
 
 MEM_MAP **memmap_array(void);

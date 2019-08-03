@@ -33,7 +33,14 @@
 #define _GNU_SOURCE
 #endif
 #include <limits.h>
-
+#include <stdint.h>
+typedef uint16_t uae_u16;
+typedef uint32_t uae_u32;
+typedef uint8_t uae_u8;
+typedef int8_t uae_s8;
+typedef int16_t uae_s16;
+typedef int32_t uae_s32;
+typedef uintptr_t uaecptr;
 // Make sure that the character types take exactly 1 byte.
 #if UCHAR_MAX != 0xFF
 #error Need 1-byte unsigned char type.

@@ -47,13 +47,12 @@ static int loaded = 0;  // loaded
 static ROM_CALL table[NMAX_ROMCALLS]; // list by id
 // TODO: GList
 static std::vector<void *> list; // sorted list (by id, addr or name)
-
-
 /* =========== */
 
 /*
     Retrieve base address of ROM calls table and size.
 */
+
 void romcalls_get_table_infos(uint32_t *base, uint32_t *size) {
 	*base = *size = 0;
 

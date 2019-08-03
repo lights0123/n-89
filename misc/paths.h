@@ -4,8 +4,8 @@
 /*  TiEmu - a TI emulator
  *  Copyright (c) 2000, Thomas Corvazier, Romain Lievin
  *  Copyright (c) 2001-2002, Romain Lievin, Julien Blache
- *  Copyright (c) 2003-2004, Romain Liévin
- *  Copyright (c) 2005, Romain Liévin, Kevin Kofler
+ *  Copyright (c) 2003-2004, Romain Liï¿½vin
+ *  Copyright (c) 2005, Romain Liï¿½vin, Kevin Kofler
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -80,7 +80,5 @@ extern TiemuInstPaths inst_paths;
 // int build_home_path(char **path, char *fileaname);
 
 int initialize_paths(void);
-
-const char *tilp_paths_build_glade(const char *name);
 
 #endif

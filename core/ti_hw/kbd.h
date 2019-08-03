@@ -6,8 +6,8 @@
  *  Copyright (c) 2000-2001, Thomas Corvazier, Romain Lievin
  *  Copyright (c) 2001-2003, Romain Lievin
  *  Copyright (c) 2003, Julien Blache
- *  Copyright (c) 2004, Romain Liévin
- *  Copyright (c) 2005, Romain Liévin
+ *  Copyright (c) 2004, Romain Liï¿½vin
+ *  Copyright (c) 2005, Romain Liï¿½vin
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -28,7 +28,8 @@
 #define __TI68K_KBD__
 
 #include "keydefs.h"
-
+#include "../ti68k_def.h"
+G_BEGIN_DECLS
 int hw_kbd_init(void);
 int hw_kbd_reset(void);
 int hw_kbd_exit(void);
@@ -39,5 +40,5 @@ void ti68k_kbd_set_key(int key, int active);
 int ti68k_kbd_is_key_pressed(int key);
 
 uint8_t hw_kbd_read_cols(void);
-
+G_END_DECLS
 #endif
