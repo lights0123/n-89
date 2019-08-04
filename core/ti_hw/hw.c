@@ -28,21 +28,20 @@
 */
 
 
-
 #include <stdlib.h>
 #include <string.h>
 
-#include "flash.h"
 #include "../../misc/gettimeofday.h"
+#include "../images.h"
+#include "../ti68k_def.h"
+#include "../uae/libuae.h"
+#include "flash.h"
 #include "gscales.h"
 #include "hwprot.h"
-#include "../images.h"
 #include "kbd.h"
-#include "../uae/libuae.h"
 #include "m68k.h"
 #include "mem.h"
 #include "ports.h"
-#include "../ti68k_def.h"
 
 // This is the ratio OSC1/(OSC2/2^5). We express everything else in fractions of OSC2/2^5.
 // On HW1, AI3 is triggered every ~10/7 of a second.

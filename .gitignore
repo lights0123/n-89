@@ -1,9 +1,4 @@
 .vscode/
 *.o
-core/uae/build68k
-core/uae/gencpu
-libn-89.a
-core/uae/cpudefs.c
-core/uae/cpustbl.c
-core/uae/cpuemu.c
-core/uae/cputbl.h
+*.a
+*.tns

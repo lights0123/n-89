@@ -33,12 +33,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "../ti68k_def.h"
+#include "../uae/libuae.h"
 #include "bits.h"
 #include "keydefs.h"
-#include "../uae/libuae.h"
 #include "m68k.h"
 #include "ports.h"
-#include "../ti68k_def.h"
 #include "tichars.h"
 
 static TiKey key_states[NB_MAX_KEYS];

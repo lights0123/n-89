@@ -36,11 +36,10 @@
 extern "C" {
 #endif
 
-#include <stdint.h>
-#include <stdint.h>
 #include "mem_size.h"
 #include "ti_hw/macros.h"
 #include "ti_hw/rtc_hw3.h"
+#include <stdint.h>
 
 uint16_t GUINT16_FROM_BE(uint16_t num);
 #define GUINT16_TO_BE GUINT16_FROM_BE

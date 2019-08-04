@@ -31,7 +31,6 @@
 #endif
 
 
-
 #include "paths.h"
 
 /* Constants */

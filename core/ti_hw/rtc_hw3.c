@@ -34,11 +34,11 @@
 
 #include "../../misc/gettimeofday.h"
 #include "../images.h"
+#include "../ti68k_def.h"
 #include "../uae/libuae.h"
 #include "mem.h"
 #include "ports.h"
 #include "rtc_hw3.h"
-#include "../ti68k_def.h"
 
 int rtc3_init(void) {
 	struct tm ref;

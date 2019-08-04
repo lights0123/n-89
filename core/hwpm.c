@@ -46,9 +46,9 @@
 #include <stdlib.h>
 #include <string.h> //memset
 
-#include "hwpm.h"
 #include "../misc/intl.h"
-#include "../src/logging.h"
+#include "../misc/logging.h"
+#include "hwpm.h"
 #include "ti68k_def.h"
 #include "ti_sw/timem.h"
 

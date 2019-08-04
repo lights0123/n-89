@@ -31,7 +31,7 @@
 #include "../core/ti_hw/tilibs.h"
 
 #include "../core/ti68k_int.h"
-#include "../src/logging.h"
+#include "../misc/logging.h"
 #include "intl.h"
 
 /*

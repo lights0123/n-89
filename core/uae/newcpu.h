@@ -7,11 +7,11 @@
  * $Id: newcpu.h 2085 2006-05-16 19:28:18Z roms $
  */
 
+#include "../ti_hw/mem.h"
 #include "machdep/maccess.h"
 #include "readcpu.h"
 #include "stdlib.h"
 #include "sysdeps.h"
-#include "../ti_hw/mem.h"
 #define CYGNUS_SIM 1
 
 #define SPCFLAG_DBTRACE 1

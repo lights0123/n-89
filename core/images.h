@@ -27,8 +27,8 @@
 #ifndef __TI68K_IMAGES__
 #define __TI68K_IMAGES__
 
-#include <stdint.h>
 #include "ti68k_def.h"
+#include <stdint.h>
 /*
   Definitions
 */

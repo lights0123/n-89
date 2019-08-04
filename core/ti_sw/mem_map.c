@@ -30,9 +30,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "../../src/logging.h"
-#include "../ti68k_int.h"
+#include "../../misc/logging.h"
 #include "../ti68k_def.h"
+#include "../ti68k_int.h"
 #include "../uae/sysdeps.h";
 #include "mem_map.h"
 

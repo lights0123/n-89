@@ -32,13 +32,13 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "hwprot.h"
+#include "../ti68k_def.h"
+#include "../ti68k_int.h"
 #include "../uae/libuae.h"
+#include "hwprot.h"
 #include "mem.h"
 #include "mem89.h"
 #include "ports.h"
-#include "../ti68k_def.h"
-#include "../ti68k_int.h"
 
 static uint32_t ba; // FLASH ROM base address (shortcut)
 

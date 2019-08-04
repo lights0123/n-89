@@ -34,10 +34,10 @@
 
 #include <string.h>
 
-#include "../ti_hw/bits.h"
-#include "../uae/libuae.h"
 #include "../ti68k_def.h"
 #include "../ti68k_int.h"
+#include "../ti_hw/bits.h"
+#include "../uae/libuae.h"
 
 /* Flushes GDB's register cache */
 extern void registers_changed(void);

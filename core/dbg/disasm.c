@@ -32,8 +32,8 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "../ti68k_int.h"
 #include "../ti68k_def.h"
+#include "../ti68k_int.h"
 
 /* ti68k_debug_disassemble is a wrapper around the GDB or UAE disassembler, so
    we can use the GDB disassembler in GDB-enabled builds and the UAE one in

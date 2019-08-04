@@ -34,13 +34,13 @@
 #include <signal.h>
 #include <sys/stat.h>
 
-#include "kbd.h"
+#include "../ti68k_def.h"
 #include "../uae/libuae.h"
+#include "kbd.h"
 #include "m68k.h"
 #include "mem.h"
 #include "ports.h"
 #include "rtc_hw3.h"
-#include "../ti68k_def.h"
 
 int hw_io_init(void) {
 	// clear hw registers
@@ -79,7 +79,7 @@ void io_put_byte(uint32_t addr, uint8_t arg) {
 		if(tihw.calc_type == TI92) bit_chg(tihw.contrast, 0, bit_get(arg, 5));
 		break;
 	case 0x01: // rw <.....2.0>
-		       // %0 clr: interleave RAM (allows use of 256K of RAM)
+	           // %0 clr: interleave RAM (allows use of 256K of RAM)
 		if(tihw.hw_type == 1) tihw.ram_size = bit_tst(arg, 0) ? 128 * KB : 256 * KB;
 
 		// %2 set: protected memory violation triggered when memory below [$000120] is written
@@ -103,8 +103,8 @@ void io_put_byte(uint32_t addr, uint8_t arg) {
 	case 0x0b:
 		break;
 	case 0x0c: // rw <765.3210>
-		       // %[3:0]: Trigger interrupt level 4 on error, activity, tx empty, rx full
-		       // see hardware.c
+	           // %[3:0]: Trigger interrupt level 4 on error, activity, tx empty, rx full
+	           // see hardware.c
 		// %6: link disable (usually reset link port or direct access to wires)
 		if(bit_tst(arg, 6) && bit_tst(arg, 5)) {
 			tihw.io[0x0d] = 0x40;
@@ -138,8 +138,8 @@ void io_put_byte(uint32_t addr, uint8_t arg) {
 	case 0x14:
 		break;
 	case 0x15: // rw <7.6543210>
-		       // %7 set: Master disable timer interrupts (level 1, 3 and 5)
-		       // see hardware.c
+	           // %7 set: Master disable timer interrupts (level 1, 3 and 5)
+	           // see hardware.c
 
 		// %[5-4]: Increment rate of $600017 (prescaler)
 		set_prescaler((arg >> 4) & 3);
@@ -177,8 +177,8 @@ void io_put_byte(uint32_t addr, uint8_t arg) {
 	           // Write any value to $60001B to acknowledge this interrupt (AutoInt2)
 		break;
 	case 0x1c: // -w <..5432..>
-		       // %[5-2] set: LCD RS (row sync) frequency, OSC2/((16-n)*8)
-		       // %1111 turns off the RS completely (used when LCD is off)
+	           // %[5-2] set: LCD RS (row sync) frequency, OSC2/((16-n)*8)
+	           // %1111 turns off the RS completely (used when LCD is off)
 		tihw.on_off = ((arg & 0x3c) == 0x3c) ? 0 : 1;
 		break;
 	case 0x1d: // -w <7..43210>
@@ -262,8 +262,8 @@ uint8_t io_get_byte(uint32_t addr) {
 		// but don't touch the SLE bit
 		tihw.io[0x0d] = (v & 0x80) | 0x40;
 		break;
-	case 0x0f: // rw <76543210>
-		       // read one byte from receive (incoming) buffer
+	case 0x0f:               // rw <76543210>
+	                         // read one byte from receive (incoming) buffer
 		io_bit_clr(0x0d, 5); // SRX=0 (rx reg is empty)
 
 		if(logger.link_buf && logger.link_mask & 2)
@@ -295,7 +295,7 @@ uint8_t io_get_byte(uint32_t addr) {
 		bit_chg(v, 1, !tihw.on_key);
 		break;
 	case 0x1b: // r- <76543210>
-		       // keyboard column status
+	           // keyboard column status
 		v = hw_kbd_read_cols();
 	case 0x1c: // -w <..5432..>
 		break;

@@ -34,16 +34,16 @@
 #include <string.h>
 
 #include "../dbg/bkpts.h"
+#include "../images.h"
+#include "../ti68k_def.h"
+#include "../ti68k_int.h"
+#include "../uae/libuae.h"
 #include "flash.h"
 #include "hw.h"
-#include "../images.h"
-#include "../uae/libuae.h"
 #include "m68k.h"
 #include "mem.h"
 #include "mem89tm.h"
 #include "ports.h"
-#include "../ti68k_def.h"
-#include "../ti68k_int.h"
 
 // 000000-03ffff : RAM (256 KB)
 // 100000-1fffff : unused

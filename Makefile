@@ -21,7 +21,7 @@ LIB = n-89
 vpath %.tns $(DISTDIR)
 vpath %.elf $(DISTDIR)
 
-all: lib$(LIB).a
+all: n-89.tns
 
 uae:
 	cd core/uae && $(MAKE) CC="$(GCC)" CFLAGS="$(GCCFLAGS)" gen
@@ -39,6 +39,19 @@ uae:
 lib$(LIB).a: uae $(OBJS)
 	ar rcs lib$(LIB).a $(OBJS)
 
+n-89.tns: lib$(LIB).a
+ifeq (, $(shell which cargo-make))
+	cargo install cargo-make
+endif
+ifeq ($(DEBUG),FALSE)
+	cd n-89 && cargo make release
+	cp n-89/target/armv5te-nspire-eabi/release/n-89.tns .
+else
+	cd n-89 && cargo make dev
+	cp n-89/target/armv5te-nspire-eabi/debug/n-89.tns .
+endif
+
 clean:
 	rm -f $(OBJS)
-	cd core/uae && $(MAKE) clean
+	rm -f n-89.tns libn-89.a
+	cd core/uae && $(MAKE) clean && $(MAKE) distclean

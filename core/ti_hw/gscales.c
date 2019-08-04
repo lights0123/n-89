@@ -29,18 +29,17 @@
 */
 
 
-
 #include <math.h>
 #include <stdlib.h>
 #include <string.h>
 
 #include "../images.h"
-#include "kbd.h"
+#include "../ti68k_def.h"
 #include "../uae/libuae.h"
+#include "kbd.h"
 #include "m68k.h"
 #include "mem.h"
 #include "ports.h"
-#include "../ti68k_def.h"
 
 #define BUFSIZE 16       // store 16 plane addresses
 #define UPDATE_PLANES 16 // must be a multiple of BUFSIZE

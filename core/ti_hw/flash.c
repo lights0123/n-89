@@ -35,7 +35,7 @@
 #include <stdlib.h>
 #include <string.h> //memset
 
-#include "../../src/logging.h"
+#include "../../misc/logging.h"
 #include "../ti68k_def.h"
 #include "flash.h"
 #include "mem.h"

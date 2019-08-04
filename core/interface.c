@@ -41,16 +41,16 @@
 #include <windows.h>
 #endif
 
+#include "../misc/logging.h"
 #include "ti_hw/hw.h"
-#include "uae/libuae.h"
-#include "../src/logging.h"
 #include "ti_hw/m68k.h"
+#include "uae/libuae.h"
 
-#include "ti_sw/mem_map.h"
 #include "mem_size.h"
-#include "ti_sw/romcalls.h"
 #include "ti68k_err.h"
 #include "ti68k_int.h"
+#include "ti_sw/mem_map.h"
+#include "ti_sw/romcalls.h"
 
 /**********************/
 /* Internal variables */

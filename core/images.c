@@ -45,10 +45,10 @@
 
 #include "uae/libuae.h"
 
+#include "../misc/intl.h"
+#include "../misc/logging.h"
 #include "hwpm.h"
 #include "images.h"
-#include "../misc/intl.h"
-#include "../src/logging.h"
 #include "ti68k_def.h"
 #include "ti68k_err.h"
 #include "ti68k_int.h"
@@ -389,7 +389,6 @@ int ti68k_unload_image_or_upgrade(void) {
 
 	return 0;
 }
-
 
 
 /*

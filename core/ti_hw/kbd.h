@@ -27,8 +27,8 @@
 #ifndef __TI68K_KBD__
 #define __TI68K_KBD__
 
-#include "keydefs.h"
 #include "../ti68k_def.h"
+#include "keydefs.h"
 G_BEGIN_DECLS
 int hw_kbd_init(void);
 int hw_kbd_reset(void);

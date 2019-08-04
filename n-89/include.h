@@ -117,7 +117,7 @@ typedef struct {
 	/** PC  at vector #1 */
 	uint32_t initial_pc;
 
-	//timer
+	// timer
 
 	/** Current timer value */
 	uint8_t timer_value;

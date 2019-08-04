@@ -34,16 +34,16 @@
 #include <string.h>
 
 #include "../dbg/bkpts.h"
+#include "../images.h"
+#include "../ti68k_def.h"
+#include "../ti68k_int.h"
+#include "../uae/libuae.h"
 #include "flash.h"
 #include "hw.h"
-#include "../images.h"
-#include "../uae/libuae.h"
 #include "m68k.h"
 #include "mem.h"
 #include "mem92.h"
 #include "ports.h"
-#include "../ti68k_def.h"
-#include "../ti68k_int.h"
 
 // 000000-1fffff : RAM (128 or 256 KB)
 // 200000-3fffff : internal ROM or unused (1.x: 1 MB)

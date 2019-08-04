@@ -27,8 +27,8 @@
 #ifndef __TIMEM__
 #define __TIMEM__
 
-#include "../ti_hw/mem.h"
 #include "../ti68k_def.h"
+#include "../ti_hw/mem.h"
 
 /*
     Functions
