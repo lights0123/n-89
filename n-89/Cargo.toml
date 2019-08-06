@@ -3,7 +3,7 @@ name = "n-89"
 version = "0.1.0"
 authors = ["lights0123 <developer@lights0123.com>"]
 edition = "2018"
-build = "build.rs"
+license = "GPL-2.0-only"
 
 [dependencies]
 ndless = "0.8.1"
@@ -12,6 +12,7 @@ cty = "0.2.0"
 ndless-sdl = "0.1.8"
 failure = {version="0.1.5",default-features=false,features=["derive"]}
 cstr_core = {version="0.1.2",features=["alloc"]}
+c2rust-bitfields = { git = "https://github.com/immunant/c2rust", features=["no_std"] }
 
 [package.metadata.zehn]
 name = "n-89"

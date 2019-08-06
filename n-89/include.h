@@ -1,5 +1,6 @@
 #include <stdint.h>
 #include <time.h>
+char *      vasnprintf (char *, size_t *, const char *, __VALIST);
 /**
   This should be the FIRST function to call (unless the 'params'
   structure has been properly initialized).

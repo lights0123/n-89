@@ -6,6 +6,7 @@ pub type __uint8_t = cty::c_uchar;
 pub type __uint32_t = cty::c_uint;
 pub type __time_t = cty::c_long;
 pub type time_t = __time_t;
+
 extern "C" {
     #[doc = "This should be the FIRST function to call (unless the 'params'"]
     #[doc = "structure has been properly initialized)."]

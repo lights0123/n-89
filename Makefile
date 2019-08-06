@@ -21,7 +21,7 @@ LIB = n-89
 vpath %.tns $(DISTDIR)
 vpath %.elf $(DISTDIR)
 
-all: n-89.tns
+all: lib$(LIB).a
 
 uae:
 	cd core/uae && $(MAKE) CC="$(GCC)" CFLAGS="$(GCCFLAGS)" gen

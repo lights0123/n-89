@@ -11,6 +11,23 @@ version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
+name = "c2rust-bitfields"
+version = "0.2.0"
+source = "git+https://github.com/immunant/c2rust#e2dc4716e728bcc82e8af41e3875c1e63e66550b"
+dependencies = [
+ "c2rust-bitfields-derive 0.1.0 (git+https://github.com/immunant/c2rust)",
+]
+
+[[package]]
+name = "c2rust-bitfields-derive"
+version = "0.1.0"
+source = "git+https://github.com/immunant/c2rust#e2dc4716e728bcc82e8af41e3875c1e63e66550b"
+dependencies = [
+ "quote 0.6.13 (registry+https://github.com/rust-lang/crates.io-index)",
+ "syn 0.15.42 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
 name = "cstr_core"
 version = "0.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -73,6 +90,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 name = "n-89"
 version = "0.1.0"
 dependencies = [
+ "c2rust-bitfields 0.2.0 (git+https://github.com/immunant/c2rust)",
  "cstr_core 0.1.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "cty 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "failure 0.1.5 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -303,6 +321,8 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 [metadata]
 "checksum autocfg 0.1.5 (registry+https://github.com/rust-lang/crates.io-index)" = "22130e92352b948e7e82a49cdb0aa94f2211761117f29e052dd397c1ac33542b"
 "checksum bitflags 1.1.0 (registry+https://github.com/rust-lang/crates.io-index)" = "3d155346769a6855b86399e9bc3814ab343cd3d62c7e985113d46a0ec3c281fd"
+"checksum c2rust-bitfields 0.2.0 (git+https://github.com/immunant/c2rust)" = "<none>"
+"checksum c2rust-bitfields-derive 0.1.0 (git+https://github.com/immunant/c2rust)" = "<none>"
 "checksum cstr_core 0.1.2 (registry+https://github.com/rust-lang/crates.io-index)" = "6ebe7158ee57e848621d24d0ed87910edb97639cb94ad9977edf440e31226035"
 "checksum cty 0.1.5 (registry+https://github.com/rust-lang/crates.io-index)" = "c4e1d41c471573612df00397113557693b5bf5909666a8acb253930612b93312"
 "checksum cty 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)" = "151a4ee37fd024fa6a134a4b506977504fa5dd378f6b7c797818ee41c7b2c23e"
