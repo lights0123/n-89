@@ -1,22 +1,25 @@
 [package]
 name = "n-89"
-version = "0.1.0"
+version = "1.0.0"
 authors = ["lights0123 <developer@lights0123.com>"]
 edition = "2018"
 build = "build.rs"
+license = "GPL-2.0-or-later"
 
 [dependencies]
 ndless = "0.8.1"
 ndless-handler = "0.2.0"
 cty = "0.2.0"
 ndless-sdl = "0.1.8"
-failure = {version="0.1.5",default-features=false,features=["derive"]}
-cstr_core = {version="0.1.2",features=["alloc"]}
+failure = { version = "0.1.5",default-features = false, features = ["derive"] }
+cstr_core = { version = "0.1.2", features = ["alloc"] }
+ndless-freetype = "0.1.3"
+unicode-segmentation = "1.3.0"
 
 [package.metadata.zehn]
 name = "n-89"
 compress = true
-notice = "Auto generated with cargo-generate"
+notice = "TI 89 Platinum emulator for the Nspire"
 flags = "--240x320-support true"
 
 [profile.release]

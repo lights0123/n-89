@@ -71,14 +71,16 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
 name = "n-89"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "cstr_core 0.1.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "cty 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "failure 0.1.5 (registry+https://github.com/rust-lang/crates.io-index)",
  "ndless 0.8.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "ndless-freetype 0.1.3 (registry+https://github.com/rust-lang/crates.io-index)",
  "ndless-handler 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "ndless-sdl 0.1.8 (registry+https://github.com/rust-lang/crates.io-index)",
+ "unicode-segmentation 1.3.0 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]

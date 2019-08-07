@@ -75,7 +75,8 @@ int hw_m68k_exit(void) {
 	ti68k_bkpt_clear_address();
 	ti68k_bkpt_clear_exception();
 
-	free(logger.pclog_buf);
+	if(logger.pclog_buf) free(logger.pclog_buf);
+	logger.pclog_buf = NULL;
 
 	return 0;
 }

@@ -1,13 +1,34 @@
+/*
+ * key_picker.rs: displays a GUI for picking keys to press
+ * Copyright (C) 2019 Ben Schattinger
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111 USA
+ */
+
 use ndless::alloc::string::String;
-use ndless::input::{get_keys, Key, wait_key_pressed, wait_no_key_pressed};
+use ndless::input::{get_keys, wait_key_pressed, wait_no_key_pressed, Key};
 use ndless::prelude::*;
 use ndless_sdl::gfx::primitives::Graphics;
-use ndless_sdl::nsdl::{Font, FontOptions};
-use ndless_sdl::Rect;
-use ndless_sdl::video::{Color, Surface};
 use ndless_sdl::video::Color::RGB;
+use ndless_sdl::video::{Color, Surface};
+use ndless_sdl::Rect;
 
 use n_89::ffi::TiKey;
+
+use crate::assets::GraphicsGlobal;
+use crate::util::DrawText;
 
 type KeyMapping = (&'static [&'static str], &'static [TiKey]);
 
@@ -17,9 +38,9 @@ const KEY_MAPPINGS: &[KeyMapping] = &[
 	(&["F3"], &[TiKey::TIKEY_F3]),
 	(&["F4"], &[TiKey::TIKEY_F4]),
 	(&["F5"], &[TiKey::TIKEY_F5]),
-	(&["F6"], &[TiKey::TIKEY_DIAMOND, TiKey::TIKEY_F1]),
-	(&["F7"], &[TiKey::TIKEY_DIAMOND, TiKey::TIKEY_F2]),
-	(&["F8"], &[TiKey::TIKEY_DIAMOND, TiKey::TIKEY_F3]),
+	(&["F6"], &[TiKey::TIKEY_2ND, TiKey::TIKEY_F1]),
+	(&["F7"], &[TiKey::TIKEY_2ND, TiKey::TIKEY_F2]),
+	(&["F8"], &[TiKey::TIKEY_2ND, TiKey::TIKEY_F3]),
 	(&["Y="], &[TiKey::TIKEY_2ND, TiKey::TIKEY_F1]),
 	(&["Window"], &[TiKey::TIKEY_2ND, TiKey::TIKEY_F2]),
 	(&["Graph"], &[TiKey::TIKEY_2ND, TiKey::TIKEY_F3]),
@@ -69,20 +90,58 @@ const KEY_MAPPINGS: &[KeyMapping] = &[
 	(&["Equals"], &[TiKey::TIKEY_EQUALS]),
 	(&["Apostrophe"], &[TiKey::TIKEY_2ND, TiKey::TIKEY_POWER]),
 	(&["Left Parenthesis"], &[TiKey::TIKEY_PALEFT]),
-	(&["Left Curly Bracket", "Left Curly Brace", "Left Brace", "Opening Curly Bracket", "Opening Curly Brace", "Opening Brace"], &[TiKey::TIKEY_2ND, TiKey::TIKEY_PALEFT]),
+	(
+		&[
+			"Left Curly Bracket",
+			"Left Curly Brace",
+			"Left Brace",
+			"Opening Curly Bracket",
+			"Opening Curly Brace",
+			"Opening Brace",
+		],
+		&[TiKey::TIKEY_2ND, TiKey::TIKEY_PALEFT],
+	),
 	(&["Right Parenthesis"], &[TiKey::TIKEY_PARIGHT]),
-	(&["Right Curly Bracket", "Right Curly Brace", "Right Brace", "Closing Curly Bracket", "Closing Curly Brace", "Closing Brace"], &[TiKey::TIKEY_2ND, TiKey::TIKEY_PARIGHT]),
+	(
+		&[
+			"Right Curly Bracket",
+			"Right Curly Brace",
+			"Right Brace",
+			"Closing Curly Bracket",
+			"Closing Curly Brace",
+			"Closing Brace",
+		],
+		&[TiKey::TIKEY_2ND, TiKey::TIKEY_PARIGHT],
+	),
 	(&["Comma"], &[TiKey::TIKEY_COMMA]),
-	(&["Left Bracket", "Opening Bracket"], &[TiKey::TIKEY_2ND, TiKey::TIKEY_COMMA]),
+	(
+		&["Left Bracket", "Opening Bracket"],
+		&[TiKey::TIKEY_2ND, TiKey::TIKEY_COMMA],
+	),
 	(&["Divide"], &[TiKey::TIKEY_DIVIDE]),
-	(&["Right Bracket", "Closing Bracket"], &[TiKey::TIKEY_2ND, TiKey::TIKEY_DIVIDE]),
+	(
+		&["Right Bracket", "Closing Bracket"],
+		&[TiKey::TIKEY_2ND, TiKey::TIKEY_DIVIDE],
+	),
 	(&["Pipe"], &[TiKey::TIKEY_PIPE]),
-	(&["Degrees", "Circle"], &[TiKey::TIKEY_2ND, TiKey::TIKEY_PIPE]),
-	(&["Integral", "Curved F"], &[TiKey::TIKEY_2ND, TiKey::TIKEY_7]),
-	(&["Derivative", "Curved D"], &[TiKey::TIKEY_2ND, TiKey::TIKEY_8]),
+	(
+		&["Degrees", "Circle"],
+		&[TiKey::TIKEY_2ND, TiKey::TIKEY_PIPE],
+	),
+	(
+		&["Integral", "Curved F"],
+		&[TiKey::TIKEY_2ND, TiKey::TIKEY_7],
+	),
+	(
+		&["Derivative", "Curved D"],
+		&[TiKey::TIKEY_2ND, TiKey::TIKEY_8],
+	),
 	(&["Semicolon"], &[TiKey::TIKEY_2ND, TiKey::TIKEY_9]),
 	(&["Multiply", "Times"], &[TiKey::TIKEY_MULTIPLY]),
-	(&["Square Root", "Radical"], &[TiKey::TIKEY_2ND, TiKey::TIKEY_MULTIPLY]),
+	(
+		&["Square Root", "Radical"],
+		&[TiKey::TIKEY_2ND, TiKey::TIKEY_MULTIPLY],
+	),
 	(&["EE"], &[TiKey::TIKEY_EE]),
 	(&["Angle"], &[TiKey::TIKEY_2ND, TiKey::TIKEY_EE]),
 	(&["Key"], &[TiKey::TIKEY_DIAMOND, TiKey::TIKEY_EE]),
@@ -106,34 +165,40 @@ const KEY_MAPPINGS: &[KeyMapping] = &[
 	(&["Negative", "Negate"], &[TiKey::TIKEY_NEGATE]),
 	(&["Answer"], &[TiKey::TIKEY_2ND, TiKey::TIKEY_NEGATE]),
 	(&["Enter"], &[TiKey::TIKEY_ENTER1]),
-	(&["Approximate"], &[TiKey::TIKEY_DIAMOND, TiKey::TIKEY_ENTER1]),
+	(
+		&["Approximate"],
+		&[TiKey::TIKEY_DIAMOND, TiKey::TIKEY_ENTER1],
+	),
 ];
 
 pub struct KeyPicker<'a> {
 	screen: &'a Surface,
-	font: Font,
+	assets: &'a GraphicsGlobal,
 }
 
 const SELECTED_COLOR: Color = RGB(54, 123, 240);
 const WHITE: Color = RGB(255, 255, 255);
+const BLACK: Color = RGB(0, 0, 0);
 const WIDTH: u16 = 280;
 const HEIGHT: u16 = 200;
 const SCR_WIDTH: u16 = 320;
 const SCR_HEIGHT: u16 = 240;
 const LEFT: i16 = ((SCR_WIDTH - WIDTH) / 2) as i16;
 const TOP: i16 = ((SCR_HEIGHT - HEIGHT) / 2) as i16;
-const LINE_HEIGHT: i16 = 12;
-const MAX_ITEMS_ON_SCREEN: usize = ((HEIGHT - 4) / LINE_HEIGHT as u16) as usize - 1;
+const LINE_HEIGHT: i16 = 16;
+const MAX_ITEMS_ON_SCREEN: usize = ((HEIGHT - 6) / (LINE_HEIGHT) as u16) as usize - 1;
 
 fn filter_items<'a>(search_term: &'a str) -> impl Iterator<Item = &'static KeyMapping> + 'a {
-	KEY_MAPPINGS
-		.iter()
-		.filter(move |(terms, _)| terms.iter().any(|term| term.to_ascii_lowercase().contains(search_term)))
+	KEY_MAPPINGS.iter().filter(move |(terms, _)| {
+		terms
+			.iter()
+			.any(|term| term.to_ascii_lowercase().contains(search_term))
+	})
 }
 
 impl<'a> KeyPicker<'a> {
-	pub fn new(screen: &'a Surface) -> Self {
-		KeyPicker { screen, font: Font::new(FontOptions::ThinType, 0, 0, 0) }
+	pub fn new(screen: &'a Surface, assets: &'a GraphicsGlobal) -> Self {
+		KeyPicker { screen, assets }
 	}
 	fn setup_screen(&self) {
 		self.screen.fill_rect(
@@ -152,7 +217,7 @@ impl<'a> KeyPicker<'a> {
 				w: WIDTH - 4,
 				h: HEIGHT - 4,
 			}),
-			WHITE,
+			BLACK,
 		);
 		self.screen.draw_rectangle(
 			(LEFT + 5, TOP + 5),
@@ -170,9 +235,20 @@ impl<'a> KeyPicker<'a> {
 			let items: Vec<_> = filter_items(&search_term).collect();
 			let on_screen = MAX_ITEMS_ON_SCREEN.min(items.len());
 			let mut y = TOP + 5 + LINE_HEIGHT + 1;
-			self.font.draw(self.screen.raw, &search_term, (LEFT + 7) as i32, (TOP + 6) as i32);
+			DrawText {
+				text: &search_term,
+				font: &self.assets.font,
+				color: WHITE,
+				bg: BLACK,
+				size: 20,
+				y: (TOP + 6 + 11) as usize,
+				x: (LEFT + 7) as usize,
+				kerning: true,
+				wrap: false,
+			}
+			.draw(self.screen);
 			for (i, item) in items.iter().enumerate().skip(top_index).take(on_screen) {
-				if i == index {
+				let bg = if i == index {
 					self.screen.fill_rect(
 						Some(Rect {
 							x: LEFT + 5,
@@ -182,8 +258,26 @@ impl<'a> KeyPicker<'a> {
 						}),
 						SELECTED_COLOR,
 					);
+					SELECTED_COLOR
+				} else {
+					BLACK
+				};
+				DrawText {
+					text: &item.0[0],
+					font: &self.assets.font,
+					color: if i == index {
+						BLACK
+					} else {
+						WHITE
+					},
+					bg,
+					size: 20,
+					y: y as usize + 11,
+					x: (LEFT + 7) as usize,
+					kerning: true,
+					wrap: false,
 				}
-				self.font.draw(self.screen.raw, item.0[0], (LEFT + 7) as i32, y as i32);
+				.draw(self.screen);
 				y += LINE_HEIGHT;
 			}
 			self.screen.flip();
@@ -203,7 +297,7 @@ impl<'a> KeyPicker<'a> {
 							index = 0;
 							top_index = 0;
 						}
-					},
+					}
 					Key::Up => {
 						if index > 0 {
 							index -= 1;
@@ -214,7 +308,7 @@ impl<'a> KeyPicker<'a> {
 							index = items.len() - 1;
 							top_index = index.checked_sub(MAX_ITEMS_ON_SCREEN - 1).unwrap_or(0);
 						}
-					},
+					}
 					Key::Del => {
 						search_term.pop();
 					}
@@ -230,7 +324,8 @@ impl<'a> KeyPicker<'a> {
 			}
 		};
 		if let Some(key) = key {
-			super::touch_key(key.1)?;
+			crate::touch_key(key.1)?;
+			wait_no_key_pressed();
 		}
 		Ok(())
 	}
