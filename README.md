@@ -1,5 +1,5 @@
 # n-89
-TI 89 Platinum emulator for the Nspire
+TI 89 Titanium emulator for the Nspire
 
 # Screenshots
 ![File picker](<screenshots/File chooser.png>)

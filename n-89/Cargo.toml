@@ -19,7 +19,7 @@ unicode-segmentation = "1.3.0"
 [package.metadata.zehn]
 name = "n-89"
 compress = true
-notice = "TI 89 Platinum emulator for the Nspire"
+notice = "TI 89 Titanium emulator for the Nspire"
 flags = "--240x320-support true"
 
 [profile.release]
