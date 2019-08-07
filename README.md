@@ -5,7 +5,7 @@ TI 89 Platinum emulator for the Nspire
 ![File picker](<screenshots/File chooser.png>)
 ![Home](screenshots/Home.png)
 ![Key picker](<screenshots/Key picker.png>)
-![Function keys](<screenshots/Function Key.png>)
+![Function keys](<screenshots/Function key.png>)
 
 # Getting an image file
 For now, you'll need a complete TIEmu `.img` file. This can be obtained
