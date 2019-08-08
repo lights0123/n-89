@@ -95,7 +95,14 @@ pub fn load_upgrade<T: Read + Seek>(src: &mut T) -> Result<(), Error> {
 	//        0x49: HW ID
 	// 0x4A - 0x4D: data length
 	let mut header = [0; 0x4E];
-	src.read(&mut header)?;
+	let mut first_byte = [0;1];
+	src.read_exact(&mut first_byte)?;
+	if &first_byte == b"*" {
+		header[0] = b'*';
+	} else {
+		src.read_exact(&mut header[0..1])?;
+	}
+	src.read_exact(&mut header[1..])?;
 	if &header[0..8] != b"**TIFL**" {
 		Err(Error::InvalidUpgrade)?
 	}
@@ -121,7 +128,7 @@ pub fn load_upgrade<T: Read + Seek>(src: &mut T) -> Result<(), Error> {
 	}
 	let mut data_vec = vec![0xff; data_size + SPP_LENGTH].into_boxed_slice();
 	let data: &mut [u8] = &mut data_vec[..];
-	src.read(&mut data[SPP_LENGTH..])?;
+	src.read_exact(&mut data[SPP_LENGTH..])?;
 	let rom_base: u8 = data[SPP_LENGTH + BOOT_OFFSET + 5] & 0xf0;
 	let calc_type = match (header[0x30] as u32, rom_base) {
 		(DeviceType_DEVICE_TYPE_89, 0x20) => CalcType::TI89,
