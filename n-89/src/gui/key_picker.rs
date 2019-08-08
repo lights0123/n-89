@@ -265,11 +265,7 @@ impl<'a> KeyPicker<'a> {
 				DrawText {
 					text: &item.0[0],
 					font: &self.assets.font,
-					color: if i == index {
-						BLACK
-					} else {
-						WHITE
-					},
+					color: if i == index { BLACK } else { WHITE },
 					bg,
 					size: 20,
 					y: y as usize + 11,

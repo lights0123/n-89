@@ -23,9 +23,10 @@
 
 use cstr_core::NulError;
 use failure::Fail;
+use ndless::io;
 
 /// The main Error type
-#[derive(Fail, Clone, Debug, Eq, PartialEq)]
+#[derive(Fail, Debug)]
 pub enum Error {
 	/// A string containing a null-character was passed to a function that needs to convert the
 	/// string to a C-style string.
@@ -65,6 +66,8 @@ pub enum Error {
 	StateMatch,
 	#[fail(display = "Other: {}", _0)]
 	Other(i32),
+	#[fail(display = "A File I/O error occured: {}", _0)]
+	IoError(io::Error),
 }
 
 impl From<i32> for Error {
@@ -94,6 +97,12 @@ impl From<i32> for Error {
 impl From<NulError> for Error {
 	fn from(err: NulError) -> Self {
 		Error::NullError(err)
+	}
+}
+
+impl From<io::Error> for Error {
+	fn from(err: io::Error) -> Self {
+		Error::IoError(err)
 	}
 }
 

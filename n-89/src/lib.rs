@@ -18,13 +18,15 @@
  */
 
 #![no_std]
-use cstr_core::CString;
-use ndless::ffi::OsStrExt;
+extern crate alloc;
+
 use ndless::path::Path;
 
 use crate::error::Result;
-use crate::ffi::{ti68k_kbd_set_key, ti68k_load_image, ti68k_reset, tihw, TiKey};
+use crate::ffi::{ti68k_kbd_set_key, ti68k_reset, tihw, TiKey};
+use ndless::fs::File;
 
+pub mod convert;
 pub mod error;
 pub mod ffi;
 
@@ -36,11 +38,7 @@ pub fn load_default_configuration() {
 
 pub fn load_image(path: impl AsRef<Path>) -> Result<()> {
 	let path = path.as_ref();
-	let path = CString::new(path.as_os_str().as_bytes())?;
-	match unsafe { ti68k_load_image(path.as_ptr()) } {
-		0 => Ok(()),
-		error => Err(error.into()),
-	}
+	convert::load_upgrade(&mut File::open(path)?)
 }
 
 pub fn init() -> Result<()> {

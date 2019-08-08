@@ -236,4 +236,36 @@ typedef enum {
 	TIKEY_VOID,
 	MAX_TIKEYS
 } TiKey;
+/**
+ * DeviceType:
+ *
+ * An enumeration which contains some device IDs for FLASH apps:
+ **/
+typedef enum
+{
+	DEVICE_TYPE_83P = 0x73,
+	DEVICE_TYPE_73  = 0x74,
+	DEVICE_TYPE_89  = 0x98,
+	DEVICE_TYPE_92P = 0x88,
+} DeviceType;
+typedef struct
+{
+	char	signature[16];	// "TiEmu img v2.00" (dc)
+	int32_t	revision;       // structure revision (compatibility)
+	int32_t	header_size;	// size of this structure and offset to pure data (dc)
+
+	uint8_t	calc_type;		// calculator type
+	uint8_t	version[5];		// firmware revision
+	uint8_t	flash;			// EPROM or FLASH
+	uint8_t	has_boot;		// FLASH upgrade does not have boot
+	int32_t	size;			// size of pure data
+	uint8_t	hw_type;		// hw1 or hw2
+	uint8_t	rom_base;       // ROM base address (MSB)
+
+	char	fill[0x40-42];  // round up struct to 0x40 bytes
+	char*	data;			// pure data (temporary use, 8 bytes)
+} IMG_INFO32;
 extern Ti68kHardware tihw;
+extern int img_loaded;
+extern int img_changed;
+extern IMG_INFO32 img_infos;

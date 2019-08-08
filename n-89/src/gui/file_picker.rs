@@ -46,6 +46,8 @@ struct FsEntry {
 	pub file_type: EntryType,
 }
 
+const ACCEPTABLE_EXTENSIONS: &[&[u8]] = &[b".89u.tns", b".9Xu.tns", b".V2u.tns"];
+
 impl TryFrom<DirEntry> for FsEntry {
 	type Error = io::Error;
 
@@ -56,12 +58,14 @@ impl TryFrom<DirEntry> for FsEntry {
 		} else {
 			EntryType::Directory
 		};
+		let extension = path
+			.file_name()
+			.ok_or(io::ErrorKind::InvalidInput)?
+			.as_bytes();
 		if file_type == EntryType::File
-			&& !path
-				.file_name()
-				.ok_or(io::ErrorKind::InvalidInput)?
-				.as_bytes()
-				.ends_with(b".img.tns")
+			&& !ACCEPTABLE_EXTENSIONS
+				.iter()
+				.any(|ext| extension.ends_with(ext))
 		{
 			return Err(io::ErrorKind::InvalidInput.into());
 		}
