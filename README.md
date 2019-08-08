@@ -17,6 +17,9 @@ Now, take the `.89u` file and rename it so that it ends with `.89u.tns`.
 Now, send that to the calculator, along with the [latest version of
 n-89]. Finally, select that image when starting n-89.
 
+Alternatively, you may create a `.img` file with [TiEmu] and load it
+with n-89, if you have a ROM dump from a physical TI-89.
+
 
 [TI-Planet]: https://tiplanet.org/forum/archives_voir.php?id=1863
 [TI directly]: https://education.ti.com/en/software/details/en/6633925F6176419197BF6CA051F5F7B4/89ti89tioperatingsystem

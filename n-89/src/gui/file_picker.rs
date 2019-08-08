@@ -46,7 +46,7 @@ struct FsEntry {
 	pub file_type: EntryType,
 }
 
-const ACCEPTABLE_EXTENSIONS: &[&[u8]] = &[b".89u.tns", b".9Xu.tns", b".V2u.tns"];
+const ACCEPTABLE_EXTENSIONS: &[&[u8]] = &[b".89u.tns", b".9Xu.tns", b".V2u.tns", b".img.tns"];
 
 impl TryFrom<DirEntry> for FsEntry {
 	type Error = io::Error;
