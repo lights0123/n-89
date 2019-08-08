@@ -26,6 +26,7 @@ with n-89, if you have a ROM dump from a physical TI-89.
 [download TiLP]: http://lpg.ticalc.org/prj_tilp/index.html
 [downloading TiEmu]: http://lpg.ticalc.org/prj_tiemu/
 [latest version of n-89]: https://github.com/lights0123/n-89/releases
+[TiEmu]: http://lpg.ticalc.org/prj_tiemu/
 
 # Usage Instructions
 After selecting the location of your `.89u` file, you will enter the
