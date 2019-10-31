@@ -56,7 +56,10 @@ features**.
 - [ ] Faster emulator: if anyone would like to improve the TiEmu code or
       (preferably) port it to Rust, that would be extremely helpful.
       There have been no changes to TiEmu since 2007, and it likely can
-      be optimized from there.
+      be optimized from there. See additional comments on the
+      [Reddit thread].
+
+[Reddit thread]: https://www.reddit.com/r/nspire/comments/cmzmic/news_ti_89_titanium_emulator_for_nspire/
 
 # Development
 ## Prerequisites
